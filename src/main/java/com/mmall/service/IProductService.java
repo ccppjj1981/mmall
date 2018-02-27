@@ -7,8 +7,12 @@ import com.mmall.vo.ProductDetailVo;
 
 public interface IProductService {
     public ServerResponse SaveOrUpdateProduct(Product product);
-    public ServerResponse<String> setSaleStatus(Integer productId,Integer status);
-    public  ServerResponse<ProductDetailVo> managerProductDetail(Integer productId);
+
+    public ServerResponse<String> setSaleStatus(Integer productId, Integer status);
+
+    public ServerResponse<ProductDetailVo> managerProductDetail(Integer productId);
+
     public ServerResponse<PageInfo> getProductList(int pageNum, int pageSize);
 
+    public ServerResponse<PageInfo> searchProduct(String productName, Integer productId, int pageNum, int pageSize);
 }
