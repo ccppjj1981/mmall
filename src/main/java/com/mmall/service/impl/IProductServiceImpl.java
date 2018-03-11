@@ -147,4 +147,9 @@ public class IProductServiceImpl implements IProductService {
         pageResult.setList(productListVoList);
         return  ServerResponse.createBySuccess(pageResult);
     }
+
+    public ServerResponse<ProductDetailVo> getProductDetail(){
+
+        return null;
+    }
 }
