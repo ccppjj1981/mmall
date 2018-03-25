@@ -8,7 +8,7 @@ public class CartProductVo {
     private Integer userId;
     private Integer productId;
     private Integer quantity;//购物车中商品的数量
-    private Integer getProductName;
+    private String productName;
     private String productSubtitle;
     private String ProductMainImage;
     private BigDecimal productPrice;
@@ -50,12 +50,12 @@ public class CartProductVo {
         this.quantity = quantity;
     }
 
-    public Integer getGetProductName() {
-        return getProductName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setGetProductName(Integer getProductName) {
-        this.getProductName = getProductName;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getProductSubtitle() {
