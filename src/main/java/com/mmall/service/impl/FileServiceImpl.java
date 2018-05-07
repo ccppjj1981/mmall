@@ -2,7 +2,7 @@ package com.mmall.service.impl;
 
 import com.google.common.collect.Lists;
 import com.mmall.service.IFileService;
-import com.mmall.util.FtpUtill;
+import com.mmall.util.FTPUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class FileServiceImpl implements IFileService {
         try {
             file.transferTo(targetFile);
             //文件已经上传成功
-            FtpUtill.uploadFile(Lists.newArrayList(targetFile));
+            FTPUtil.uploadFile(Lists.newArrayList(targetFile));
             //todo 上传完成后，删除upload下面的文件
             targetFile.delete();
 

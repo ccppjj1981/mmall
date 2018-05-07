@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class FtpUtill {
-    private static  final Logger logger = LoggerFactory.getLogger(FtpUtill.class);
+public class FTPUtil {
+    private static  final Logger logger = LoggerFactory.getLogger(FTPUtil.class);
     private  static String ftpIp = PropertiesUtil.getProperty("ftp.server.ip");
     private  static String ftpUser = PropertiesUtil.getProperty("ftp.user");
     private  static String ftpPass = PropertiesUtil.getProperty("ftp.pass");
@@ -21,14 +21,14 @@ public class FtpUtill {
     private String user;
     private String pwd;
     private FTPClient ftpClient;
-    public FtpUtill(String ip,int port,String user,String pwd){
+    public FTPUtil(String ip,int port,String user,String pwd){
         this.ip = ip;
         this.port = port;
         this.user = user;
         this.pwd = pwd;
     }
     public static boolean uploadFile(List<File> fileList) throws IOException {
-        FtpUtill ftpUtill = new FtpUtill(ftpIp,21,ftpUser,ftpPass);
+        FTPUtil ftpUtill = new FTPUtil(ftpIp,21,ftpUser,ftpPass);
         logger.info("开始连接ftp服务器");
         boolean result = ftpUtill.uploadFile("img",fileList);
         logger.info("开始连接ftp服务器,结束上传，上传结果:{}");
@@ -77,7 +77,7 @@ public class FtpUtill {
     }
 
     public static void setFtpIp(String ftpIp) {
-        FtpUtill.ftpIp = ftpIp;
+        FTPUtil.ftpIp = ftpIp;
     }
 
     public static String getFtpUser() {
@@ -85,7 +85,7 @@ public class FtpUtill {
     }
 
     public static void setFtpUser(String ftpUser) {
-        FtpUtill.ftpUser = ftpUser;
+        FTPUtil.ftpUser = ftpUser;
     }
 
     public static String getFtpPass() {
@@ -93,7 +93,7 @@ public class FtpUtill {
     }
 
     public static void setFtpPass(String ftpPass) {
-        FtpUtill.ftpPass = ftpPass;
+        FTPUtil.ftpPass = ftpPass;
     }
 
     public String getIp() {

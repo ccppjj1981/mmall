@@ -26,6 +26,8 @@ public class OrderController {
     private static  final Logger logger = LoggerFactory.getLogger(OrderController.class);
     @Autowired
     private IOrderService iOrderService;
+    @RequestMapping("pay.do")
+    @ResponseBody
     public  ServerResponse pay(HttpSession session,Long orderNo,HttpServletRequest request){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
@@ -33,7 +35,7 @@ public class OrderController {
                     ResponseCode.NEED_LOGIN.getDesc());
         }
         String path = request.getSession().getServletContext().getRealPath("upload");
-        return null;
+        return iOrderService.pay(orderNo,user.getId(),path);
 
     }
 
@@ -77,5 +79,21 @@ public class OrderController {
             return Const.AlipayCallback.RESPONSE_SUCCESS;
         }
         return Const.AlipayCallback.RESPONSE_FAILED;
+    }
+    @RequestMapping("query_order_pay_status.do")
+    @ResponseBody
+    public  ServerResponse<Boolean> queryOrderPayStatus(HttpSession session,Long orderNo,HttpServletRequest request){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),
+                    ResponseCode.NEED_LOGIN.getDesc());
+        }
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        ServerResponse serverResponse = iOrderService.queryOrderPayStatus(user.getId(),orderNo);
+        if(serverResponse.isSuccess()){
+            return ServerResponse.createBySuccess(true);
+        }
+        return ServerResponse.createBySuccess(false);
+
     }
 }
