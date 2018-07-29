@@ -325,6 +325,12 @@ public class OrderServiceImpl implements IOrderService {
         for (Cart cartItem : cartList) {
             OrderItem orderItem = new OrderItem();
             Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
+            if(product == null){
+                return ServerResponse.createByErrorMessage(cartItem.getProductId() + "产品不存在");
+            }
+            if(product.getStatus() == null){
+                return ServerResponse.createByErrorMessage("产品状态为空");
+            }
             if (Const.ProductStatusEnum.ON_SALE.getCode() != product.getStatus()) {
                 return ServerResponse.createByErrorMessage("产品不是在线售卖状态");
             }
