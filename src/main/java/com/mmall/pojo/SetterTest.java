@@ -1,5 +1,7 @@
 package com.mmall.pojo;
 
+import lombok.Setter;
+
 /**
  * Created with IntelliJ IDEA.
  * User: macbook
@@ -7,5 +9,7 @@ package com.mmall.pojo;
  * Time: 下午10:28
  * Description: No Description
  */
+@Setter
 public class SetterTest {
+    private String name;
 }
