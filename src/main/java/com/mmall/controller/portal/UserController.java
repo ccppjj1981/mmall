@@ -38,8 +38,6 @@ public class UserController {
         if(response.isSuccess()){
             //session.setAttribute(Const.CURRENT_USER,response.getData());
             CookieUtil.writeLoginToken(httpServletResponse,session.getId());
-            CookieUtil.readLoginToken(request);
-            CookieUtil.delLoginToken(request,httpServletResponse);
             RedisPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()),
                     Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
         }
@@ -47,8 +45,10 @@ public class UserController {
     }
 	@RequestMapping(value = "logout.do",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<String> logout(HttpSession session){
-        session.removeAttribute(Const.CURRENT_USER);
+    public ServerResponse<String> logout(HttpServletRequest request,HttpServletResponse response){
+        String loginToken = CookieUtil.readLoginToken(request);
+        CookieUtil.delLoginToken(request,response);
+        RedisPoolUtil.del(loginToken);
         return ServerResponse.createBySuccess();
     }
 	

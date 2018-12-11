@@ -25,6 +25,7 @@ public class CookieUtil {
                 log.info("read cookieName:{},cookieValue:{}",ck.getName(),ck.getValue());
                 if(StringUtils.equals(ck.getName(),COOKIE_NAME)){
                     log.info("return cookieName:{},cookieValue:{}",ck.getName(),ck.getValue());
+                    return ck.getValue();
                 }
             }
         }
@@ -35,6 +36,7 @@ public class CookieUtil {
         ck.setDomain(COOKIE_DOMAIN);
         ck.setPath("/");
         ck.setMaxAge(60*60*24*365);
+        ck.setHttpOnly(true);
         log.info("write cookieName:{},cookieValue:{}",ck.getName(),ck.getValue());
         response.addCookie(ck);
     }
