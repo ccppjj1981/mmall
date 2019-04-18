@@ -19,4 +19,6 @@ public interface IOrderService {
     public  ServerResponse<OrderVo> manageDetail(Long orderNo);
     public ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize);
     public ServerResponse<String> manageSendGoods(Long orderNo);
+    //hour小时未关闭的订单，进行关闭
+    void closeOrder(int hour);
 }
