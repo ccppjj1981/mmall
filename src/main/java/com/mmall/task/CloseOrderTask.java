@@ -32,7 +32,7 @@ public class CloseOrderTask {
         //iOrderService.closeOrder(hour);
         log.info("closeOrderTaskV1 end");
     }
-
+    @Scheduled(cron = "0 */1 * * * ?")
     public void closeOrderTaskV2() {
         log.info("closeOrderTaskV2 start");
         Long lockTimeout = Long.parseLong(PropertiesUtil.getProperty("lock.timeout", "5000"));
